@@ -20,9 +20,11 @@ kombu==5.3.5
 packaging==23.2
 pillow==10.2.0
 prompt-toolkit==3.0.43
+psycopg2-binary==2.9.9
 PyJWT==2.8.0
 python-crontab==3.0.0
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 pytz==2024.1
 PyYAML==6.0.1
 redis==5.0.2
