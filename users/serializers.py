@@ -7,13 +7,13 @@ from users.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'password']
+        fields = "__all__"
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password']
+        fields = "__all__"
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])

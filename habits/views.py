@@ -8,31 +8,38 @@ from habits.serializers import HabitsSerializer
 
 
 class HabitCreateView(generics.CreateAPIView):
+    """Создание привычки"""
     serializer_class = HabitsSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        new_habit = serializer.save()
+        new_habit.user = self.request.user
+        new_habit.save()
 
 
 class HabitRetrieveView(generics.RetrieveAPIView):
+    """ Просмотр привычки """
     serializer_class = HabitsSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitUpdateView(generics.UpdateAPIView):
+    """Обновление привычки"""
     serializer_class = HabitsSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitDestroyView(generics.DestroyAPIView):
+    """ Удаление привычки """
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitListView(generics.ListAPIView):
+    """Список привычек пользователя"""
     serializer_class = HabitsSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
@@ -43,6 +50,7 @@ class HabitListView(generics.ListAPIView):
 
 
 class HabitPublishedListView(generics.ListAPIView):
+    """Список публичных привычек"""
     serializer_class = HabitsSerializer
     queryset = Habit.objects.all()
     pagination_class = HabitPaginator

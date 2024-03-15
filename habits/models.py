@@ -8,8 +8,8 @@ NULLABLE = {'blank': True, 'null': True}
 
 class Habit(models.Model):
     PERIOD_CHOICES = [
-        ('week', 'ежедневно'),
-        ('day', 'еженедельно'),
+        ('week', 'еженедельно'),
+        ('day', 'ежедневно'),
     ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Создатель привычки')
@@ -26,6 +26,7 @@ class Habit(models.Model):
     is_public = models.BooleanField(default=False, verbose_name="Признак публичности")
 
     def clean(self):
+        """Валидаторы"""
 
         if self.linked_habit and self.reward:
             raise ValidationError(_("Нельзя одновременно выбрать связанную привычку и вознаграждение."))

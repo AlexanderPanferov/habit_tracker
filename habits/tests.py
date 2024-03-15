@@ -14,6 +14,7 @@ class HabitTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_create_habit(self):
+        """Тестирование создания привычки"""
         data = {
             'user': self.user.pk,
             'name': 'Test',
@@ -45,6 +46,7 @@ class HabitTestCase(APITestCase):
         )
 
     def test_list_habit(self):
+        """Тестирование списка привычек"""
         habit = Habit.objects.create(
             user=self.user,
             name='Test1',
@@ -72,6 +74,7 @@ class HabitTestCase(APITestCase):
         )
 
     def test_detail_habit(self):
+        """Тестирование просмотра привычек"""
         habit = Habit.objects.create(
             user=self.user,
             name='Test1',
@@ -98,6 +101,7 @@ class HabitTestCase(APITestCase):
         )
 
     def test_update_habit(self):
+        """Тестирование обнавления привычки"""
         habit = Habit.objects.create(
             user=self.user,
             name='Test1',
@@ -129,6 +133,7 @@ class HabitTestCase(APITestCase):
         )
 
     def test_delete_habit(self):
+        """Тестирование удаления привычки"""
         habit = Habit.objects.create(
             user=self.user,
             name='Test1',
