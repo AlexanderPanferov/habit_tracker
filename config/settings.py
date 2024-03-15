@@ -1,4 +1,6 @@
 import os
+from datetime import timedelta
+
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -29,10 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_celery_beat',
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
     'corsheaders',
+
 
     'users',
     'habits',
@@ -138,6 +142,11 @@ REST_FRAMEWORK = {
     ]
 }
 
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': timedelta(days=1),  # Время жизни токена 1 день
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=1),  # Время обновления токена 1 дней
+}
+
 CORS_ALLOWED_ORIGINS = [
     "https://read-only.example.com",
     "https://read-and-write.example.com",
@@ -146,3 +155,12 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://read-and-write.example.com",
 ]
+
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
+CELERY_TIMEZONE = 'UTC'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+
+TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY')
