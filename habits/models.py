@@ -25,18 +25,6 @@ class Habit(models.Model):
     duration = models.PositiveIntegerField(verbose_name="Время на выполнение", help_text="Не больше 120 секунд")
     is_public = models.BooleanField(default=False, verbose_name="Признак публичности")
 
-    def clean(self):
-        """Валидаторы"""
-
-        if self.linked_habit and self.reward:
-            raise ValidationError(_("Нельзя одновременно выбрать связанную привычку и вознаграждение."))
-
-        if self.duration > 120:
-            raise ValidationError(_("Время на выполнение должно быть не больше 120 секунд."))
-
-        if self.is_pleasant and (self.linked_habit or self.reward):
-            raise ValidationError(_("У приятной привычки не может быть вознаграждения или связанной привычки"))
-
     def __str__(self):
         return self.name
 
