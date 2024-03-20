@@ -1,6 +1,4 @@
 from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
@@ -22,7 +20,7 @@ class Habit(models.Model):
                                      limit_choices_to={'is_pleasant': True}, verbose_name='Связанная привычка')
     frequency = models.CharField(max_length=15, choices=PERIOD_CHOICES, default='day', verbose_name='Переодичность')
     reward = models.CharField(max_length=255, **NULLABLE, verbose_name='Вознаграждение')
-    duration = models.PositiveIntegerField(verbose_name="Время на выполнение", help_text="Не больше 120 секунд")
+    duration = models.DurationField(verbose_name="Время на выполнение", help_text="Не больше 120 секунд")
     is_public = models.BooleanField(default=False, verbose_name="Признак публичности")
 
     def __str__(self):

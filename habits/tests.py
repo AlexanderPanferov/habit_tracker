@@ -23,6 +23,7 @@ class HabitTestCase(APITestCase):
             'action': 'Test',
             'frequency': 'day',
             'duration': '50',
+
         }
 
         response = self.client.post(
@@ -38,7 +39,8 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.json(),
             {'id': 1, 'name': 'Test', 'location': 'Test', 'time': '10:10:10', 'action': 'Test', 'is_pleasant': False,
-             'frequency': 'day', 'reward': None, 'duration': 50, 'is_public': False, 'user': 1, 'linked_habit': None}
+             'frequency': 'day', 'reward': None, 'duration': '00:00:50', 'is_public': False, 'user': 1,
+             'linked_habit': None}
         )
 
         self.assertTrue(
@@ -69,7 +71,7 @@ class HabitTestCase(APITestCase):
             response.json(),
             {'count': 1, 'next': None, 'previous': None, 'results': [
                 {'id': habit.pk, 'name': 'Test1', 'location': 'Test', 'time': '10:10:10', 'action': 'Test',
-                 'is_pleasant': False, 'frequency': 'day', 'reward': None, 'duration': 50, 'is_public': False,
+                 'is_pleasant': False, 'frequency': 'day', 'reward': None, 'duration': '00:00:50', 'is_public': False,
                  'user': self.user.pk, 'linked_habit': None}]}
         )
 
@@ -95,8 +97,10 @@ class HabitTestCase(APITestCase):
         )
         self.assertEqual(
             response.json(),
-            {'id': habit.pk, 'name': 'Test1', 'location': 'Test', 'time': '10:10:10', 'action': 'Test', 'is_pleasant': False,
-             'frequency': 'day', 'reward': None, 'duration': 50, 'is_public': False, 'user': self.user.pk, 'linked_habit': None}
+            {'id': habit.pk, 'name': 'Test1', 'location': 'Test', 'time': '10:10:10', 'action': 'Test',
+             'is_pleasant': False,
+             'frequency': 'day', 'reward': None, 'duration': '00:00:50', 'is_public': False, 'user': self.user.pk,
+             'linked_habit': None}
 
         )
 
@@ -127,8 +131,10 @@ class HabitTestCase(APITestCase):
         )
         self.assertEqual(
             response.json(),
-            {'id': habit.pk, 'name': 'Test1', 'location': 'Test', 'time': '11:11:11', 'action': 'Test', 'is_pleasant': False,
-             'frequency': 'day', 'reward': None, 'duration': 50, 'is_public': False, 'user': self.user.pk, 'linked_habit': None}
+            {'id': habit.pk, 'name': 'Test1', 'location': 'Test', 'time': '11:11:11', 'action': 'Test',
+             'is_pleasant': False,
+             'frequency': 'day', 'reward': None, 'duration': '00:00:50', 'is_public': False, 'user': self.user.pk,
+             'linked_habit': None}
 
         )
 
