@@ -20,3 +20,10 @@
 Версия Python: 3.11.14
 Версия Django: 4.2.5
 Полный список модулей содержится в файле requirements.txt
+
+Созданы контейнеры для Docker
+Для запуска Docker использовать комманды:
+ - docker compose build
+ - docker compose up
+Выполнить миграции:
+ - docker compose exec app python manage.py migrate
